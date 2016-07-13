@@ -38,6 +38,7 @@ print_words() and print_top().
 """
 
 import sys
+import operator
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
@@ -65,6 +66,20 @@ def print_words(filename):
   sortedwords = sorted(dictionary.keys())
   for word in sortedwords:
     print word, dictionary[word]
+
+def print_top(filename):
+  dictionary = word_count_dict(filename)
+  freqsorted = sorted(dictionary.items(), key=operator.itemgetter(1)) 
+  for i in range(20):
+    key,value = max(dictionary.items(), key=lambda k: k[1])
+    print key, value
+    dictionary[key]=0
+    
+    """ solution:
+    items = sorted(dictionary.items(), key=get_count, reverse=True)
+    for item in items[:20]:
+      print item[0], item[1]
+  
 
 ###
 
