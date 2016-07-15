@@ -17,7 +17,9 @@ import commands
 
 # +++your code here+++
 # Write functions and modify main() to call them
-
+def get_special_paths(dir):
+  filenames = os.listdir(dir)
+  print filenames
 
 
 def main():
@@ -50,6 +52,7 @@ def main():
 
   # +++your code here+++
   # Call your functions
+  get_special_paths(dir)
   
 if __name__ == "__main__":
   main()
