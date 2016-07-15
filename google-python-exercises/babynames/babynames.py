@@ -42,7 +42,7 @@ def extract_names(filename):
   """
   # +++your code here+++
   f = open(filename,'r')
-  match = re.search(r'\d\d\d\d', f.read())
+  match = re.search(r'(Popularity in )(\d\d\d\d)', f.read())
 
   return match
 
@@ -66,7 +66,8 @@ def main():
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
-  print extract_names(args[0])
+  match = extract_names(args[0])
+  print match.group(2)
   
 if __name__ == '__main__':
   main()
