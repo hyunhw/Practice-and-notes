@@ -68,11 +68,10 @@ def extract_names(filename):
       names[girlname] = rank
 
   sorted_names = sorted(names.keys())
+  for items in sorted_names:
+    result.append(items + " "+ names[items])
 
-
-
-
-  return year_match 
+  return result 
 
 
 def main():
@@ -95,7 +94,7 @@ def main():
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
   match = extract_names(args[0])
-  print match.group(1)
+  print match
   
 if __name__ == '__main__':
   main()
