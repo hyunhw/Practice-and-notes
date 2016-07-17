@@ -18,8 +18,18 @@ import commands
 # +++your code here+++
 # Write functions and modify main() to call them
 def get_special_paths(dirname):
+  results = []
   filenames = os.listdir(dirname)
-  print filenames
+  for files in filenames:
+    match = re.search(r'__(\w+)__', files) 
+    if match:
+      results.append(os.path.abspath(os.path.join(dirname,files)))
+  #print filenames
+
+  #for filename in filenames:
+    #print os.path.join(dirname,filename)
+
+  return results 
 
 
 def main():
@@ -54,7 +64,14 @@ def main():
   # Call your functions
 
   # IMPORTANT: args is a 'list' thus I have to specify the element to pass
-  get_special_paths(args[0])
+  #get_special_paths(args[0])
+  if todir:
+    os.mkdir(todir)
+    filenames = get_special_paths(args[0])
+    print filenames
+    for files in filenames:
+      shutil.copy(files,os.path.abspath(todir))
+
   
 if __name__ == "__main__":
   main()
