@@ -20,11 +20,11 @@ import commands
 def get_special_paths(dirname):
   results = []
   filenames = os.listdir(dirname)
+  # search for files matching __"word"__ format
   for files in filenames:
     match = re.search(r'__(\w+)__', files) 
     if match:
       results.append(os.path.abspath(os.path.join(dirname,files)))
-  #print filenames
 
   #for filename in filenames:
     #print os.path.join(dirname,filename)
@@ -64,13 +64,19 @@ def main():
   # Call your functions
 
   # IMPORTANT: args is a 'list' thus I have to specify the element to pass
-  #get_special_paths(args[0])
+  # get_special_paths(args[0])
   if todir:
     os.mkdir(todir)
     filenames = get_special_paths(args[0])
     print filenames
     for files in filenames:
       shutil.copy(files,os.path.abspath(todir))
+
+  if tozip:
+    filenames = get_special_paths(args[0])
+    for files in filenames:
+      print 'Command I\'m going to do: zip -j '+tozip+' '+os.path.abspath(files)
+      os.system('zip -j '+tozip+' '+os.path.abspath(files))
 
   
 if __name__ == "__main__":
