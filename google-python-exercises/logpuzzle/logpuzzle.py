@@ -26,6 +26,15 @@ def read_urls(filename):
   increasing order."""
   # +++your code here+++
   result = []
+  f = open(filename,'r')
+  text = f.read()
+  url = re.findall(r'GET (\S+puzzle\S+)' , text)
+  print url
+  for item in url:
+    if item not in result:
+      result.append(item)
+
+  print result
   
   
 
