@@ -30,18 +30,19 @@ def read_urls(filename):
   underbar = filename.index('_')
   # grabs what follows the '_'
   hostname = filename[underbar + 1:]
-  print hostname
 
   result = []
   f = open(filename,'r')
   text = f.read()
   url = re.findall(r'GET (\S+puzzle\S+)' , text)
-  print url
   for item in url:
-    if item not in result:
-      result.append('http://'+hostname+item)
+    fullname = 'http://'+hostname+item
+    if fullname not in result:
+      result.append(fullname)
 
-  print result
+  result.sort() 
+  for item in result:
+    print item
   
   
 
