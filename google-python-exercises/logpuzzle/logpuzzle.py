@@ -25,6 +25,13 @@ def read_urls(filename):
   Screens out duplicate urls and returns the urls sorted into
   increasing order."""
   # +++your code here+++
+
+  # fines the index number for what matches the string '_'
+  underbar = filename.index('_')
+  # grabs what follows the '_'
+  hostname = filename[underbar + 1:]
+  print hostname
+
   result = []
   f = open(filename,'r')
   text = f.read()
@@ -32,7 +39,7 @@ def read_urls(filename):
   print url
   for item in url:
     if item not in result:
-      result.append(item)
+      result.append('http://'+hostname+item)
 
   print result
   

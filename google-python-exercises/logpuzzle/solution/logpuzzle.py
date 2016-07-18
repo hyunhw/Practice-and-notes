@@ -57,6 +57,7 @@ def read_urls(filename):
       if 'puzzle' in path:
         url_dict['http://' + host + path] = 1
 
+  print sorted(url_dict.keys(), key=url_sort_key)
   return sorted(url_dict.keys(), key=url_sort_key)
   # LAB(end solution)
 
