@@ -10,6 +10,7 @@ import os
 import re
 import sys
 import urllib
+import shutil
 
 """Logpuzzle exercise
 Given an apache logfile, find the puzzle urls and download the images.
@@ -39,7 +40,7 @@ def read_urls(filename):
     fullname = 'http://'+hostname+item
     if fullname not in result:
       result.append(fullname)
-
+  f.close()
   result.sort() 
   #for item in result:
     #print item
@@ -59,12 +60,18 @@ def download_images(img_urls, dest_dir):
   #urllib.urlretrieve(img_urls)
 
   i=0
+  f = open('index.html','w')
+  f.write('<html><body>\n')
   for img in img_urls:
     toname = 'img%d'%i
+    f.write('<img src=\"/edu/python/exercises/'+toname+'\">')
     #print 'Retrieving '+img+' and copying it as '+toname
     # urllib.urlretrieve takes 2 arguments: img_url, and where to copy as
     urllib.urlretrieve(img, os.path.join(dest_dir,toname))
     i+=1
+  f.write('</body></html>')
+  f.close()
+  shutil.move('index.html',dest_dir)
   
 
 def main():
