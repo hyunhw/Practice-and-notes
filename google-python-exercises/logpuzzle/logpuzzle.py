@@ -41,10 +41,9 @@ def read_urls(filename):
       result.append(fullname)
 
   result.sort() 
-  for item in result:
-    print item
-  
-  
+  #for item in result:
+    #print item
+  return result
 
 def download_images(img_urls, dest_dir):
   """Given the urls already in the correct order, downloads
@@ -55,6 +54,17 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
   # +++your code here+++
+  if not os.path.exists(dest_dir):
+    os.mkdir(dest_dir)
+  #urllib.urlretrieve(img_urls)
+
+  i=0
+  for img in img_urls:
+    toname = 'img%d'%i
+    #print 'Retrieving '+img+' and copying it as '+toname
+    # urllib.urlretrieve takes 2 arguments: img_url, and where to copy as
+    urllib.urlretrieve(img, os.path.join(dest_dir,toname))
+    i+=1
   
 
 def main():
