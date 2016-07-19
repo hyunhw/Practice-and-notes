@@ -64,11 +64,12 @@ def download_images(img_urls, dest_dir):
   f.write('<html><body>\n')
   for img in img_urls:
     toname = 'img%d'%i
-    f.write('<img src=\"/edu/python/exercises/'+toname+'\">')
+    f.write('<img src=\"'+toname+'\">')
     #print 'Retrieving '+img+' and copying it as '+toname
     # urllib.urlretrieve takes 2 arguments: img_url, and where to copy as
     urllib.urlretrieve(img, os.path.join(dest_dir,toname))
     i+=1
+  f.write('\n')
   f.write('</body></html>')
   f.close()
   shutil.move('index.html',dest_dir)
