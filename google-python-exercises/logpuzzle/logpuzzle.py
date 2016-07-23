@@ -19,6 +19,12 @@ Here's what a puzzle url looks like:
 10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
 """
 
+def sort_key(url):
+  match = re.search(r'-(\w+)-(\w+)\.\w+',url)
+  if match:
+    return match.group(2)
+  else:
+    return url
 
 def read_urls(filename):
   """Returns a list of the puzzle urls from the given log file,
@@ -36,15 +42,16 @@ def read_urls(filename):
   f = open(filename,'r')
   text = f.read()
   url = re.findall(r'GET (\S+puzzle\S+)' , text)
+
   for item in url:
     fullname = 'http://'+hostname+item
     if fullname not in result:
       result.append(fullname)
   f.close()
-  result.sort() 
+  #result.sort() 
   #for item in result:
     #print item
-  return result
+  return sorted(result, key=sort_key)
 
 def download_images(img_urls, dest_dir):
   """Given the urls already in the correct order, downloads
